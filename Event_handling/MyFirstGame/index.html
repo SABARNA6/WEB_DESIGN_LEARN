@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first Game</title>
+    <style>
+    *{
+        font-family: monospace;
+        font-weight: bolder;
+    }
+        div button{
+            font-size: larger;
+            background-color: rgb(192, 255, 104);
+            padding:10px 20px;
+            border-radius: 20px;
+            border: 2px solid rgb(159, 206, 63);
+        }
+        .Footer{
+            margin:0px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: aqua;
+            text-align: center;
+            padding: 10px;
+            height: 20lvh;
+        }
+        .CountDown{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:40px;
+            width: 100%;
+            height: 40lvh;
+        }
+        #count{
+            font-size: 3rem;
+
+        }
+        #start,#reset{
+            font-size: 2rem;
+            color:rgb(18, 172, 1);
+        }
+        #reset{
+            background-color:rgb(255, 81, 81);
+            color:rgb(145, 47, 9);
+            border: 2px solid rgb(180, 7, 1);
+        }
+        #title{
+            font-size: 3rem;
+            color: rgb(118, 121, 113);
+            font-weight: bolder;
+            text-align: center;
+            text-shadow: 4px 5px 5px rgb(197, 194, 194);
+        }
+        #myImage{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <img src="./dragonInGif.gif" id="myImage" alt="Dragon" width="120px" height="120px">
+    <h1 id="title">Get Set Go</h1>
+    <div class="CountDown">
+        <span id="count"></span>
+        <button id="start" onclick="start()">Start</button>
+        <button id="reset" onclick="reset()">Reset</button>
+        
+    </div>
+    <div    class="Footer">
+        <h1>Choose the seconds</h1>
+        <div>
+            <button onclick="setCount(3)">3s</button>
+            <button onclick="setCount(5)" >5s</button>
+            <button onclick="setCount(15)" >15s</button>
+        </div>
+    </div>
+    <script>
+        var score=0;
+        var timer,sleep;
+        var count=10;
+        var pre=count;
+        var countDown=document.getElementById("count");
+        const img = document.getElementById("myImage"); // Get the image element
+        function generates()
+        {
+            var x = Math.floor(Math.random() * (window.innerWidth-300));
+            var y = Math.floor(Math.random() * (window.innerHeight-300));
+            img.style.display="block";
+            img.style.position = "absolute";
+            img.style.top=`${y}px`;
+            img.style.left=`${x}px`;
+        }
+
+        updateCount();
+        // setting count
+        function setCount(x){
+            count=x;
+            pre=x;
+            updateCount();
+            clearInterval(timer);
+        }
+        //update count 
+        function updateCount()
+        {
+            countDown.innerHTML=count;
+        }
+        // starting the count
+        function start()
+        {
+            
+            if(count<=0)
+            {
+                return;
+            }
+            generates();
+            clearInterval(timer);
+            timer= setInterval(() => {
+                if (count <= 0) {
+                    clearInterval(timer);// Stop countdown at 0
+                    countDown.innerHTML = `Score : ${score}`;
+                    img.style.display="none";
+                    score=0;    
+                    return;
+                }
+                count--;
+                updateCount();
+            }, 1000);
+            
+        }
+        //resettig
+        function reset(){ 
+            clearInterval(timer);
+            count=pre;
+            updateCount();
+            img.style.display="none";
+        }
+        
+        document.getElementById("myImage").addEventListener("mouseover",()=>{
+            generates();
+            score++;
+        });
+
+    </script>
+</body>
+</html>
+
+<!--  timer = setInterval(() => {
+                count--;
+                countDownElement.innerHTML = count;
+
+                if (count <= 0) {
+                    clearInterval(timer); // Stop countdown at 0
+                    countDownElement.innerHTML = "Time's up! ⏳";
+                }
+            }, 1000); -->
