@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="counter.css"> -->
+     <style>
+body{
+   text-align: center;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   background-color: rgb(199, 252, 252);
+   display: flex-column;
+
+   justify-items: center;
+}
+#Element{
+   
+    padding:30px;
+    background-color: rgb(128, 176, 73);
+    border-radius: 20px;
+    width: fit-content;
+}
+button{
+    color:rgb(107, 107, 231);
+    padding:1rem ;
+    border: 1px solid rgb(183, 174, 161);
+    border-radius: 1rem;
+    background-color: rgb(245, 235, 223);
+    font-weight: bolder;
+}
+#Display    {
+    margin:1rem;
+    background-color: aliceblue;
+    border-radius: 1rem;
+    padding:1rem;
+}
+     </style>
+</head>
+<body>
+    <div>
+        <h1 style="color: rgb(255, 78, 78);">COUNTER</h1>
+    <p> Move Mouse On the '-' To Decrease The Counter </p>
+    <p> Move Mouse On the '+' To Increase The Counter </p>
+ </div>
+    <div id="Element" >
+        <button id="dec" >-</button>
+        <span id="Display">0</span>
+        <button id="add">+</button>
+        <span style="color: rgb(0, 48, 70);padding: 20px;" id="display"></span>
+    </div>
+    <script >
+    var count=0;
+    var dec=document.getElementById("dec");
+    var add=document.getElementById("add");
+    var disp=document.getElementById("Display");
+    var ele=document.getElementById('Element');
+    var dispWorry=document.getElementById('display');
+    
+    ele.addEventListener('mouseout',function(){
+        dispWorry.innerHTML="GOOD JOB  PLS.. COME AGAIN";
+    })
+    ele.addEventListener('mousemove',function(){
+        dispWorry.innerHTML="";
+    })
+    dec.addEventListener('mouseover',function (){
+        count--;
+        disp.innerHTML=count;
+    },false);
+    add.addEventListener('mouseover',function (){
+        count++;
+        disp.innerHTML=count;
+    },false);
+        
+    </script>
+    <!-- <script src="counter.js"></script> -->
+</body>
+</html>
